@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sangeet Waale | Premium Wedding Choreography by Jyoti</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           1. CORE VARIABLES & RESET (Cool Pink & Red Theme)
+           ========================================================================== */
+        :root {
+            /* Cool, faint blush background */
+            --bg-blush: #FDF8F9; 
+            --bg-white: #FFFFFF;
+            
+            /* Deep, cool-toned darks for text */
+            --text-dark: #2B1A20; 
+            --text-light: #6A565D; 
+            
+            /* Brand Colors: Cool Pinkish-Red */
+            --brand-primary: #D81B60; /* Vibrant cool ruby/pink */
+            --brand-light: #F4C2D7;   /* Soft pink for borders and accents */
+            
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Lato', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            background-color: var(--bg-blush);
+            color: var(--text-dark);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+        
+        h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; color: var(--text-dark); }
+        .highlight-text { color: var(--brand-primary); font-style: italic; }
+        
+        /* Smooth Fade-in classes */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ==========================================================================
+           2. ELEGANT NAVBAR
+           ========================================================================== */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 25px 0;
+            background: transparent; z-index: 1000; transition: 0.4s ease;
+        }
+        nav.scrolled { background: rgba(253, 248, 249, 0.95); backdrop-filter: blur(10px); padding: 15px 0; box-shadow: 0 2px 20px rgba(0,0,0,0.05); }
+        nav.scrolled .nav-links a { color: var(--text-dark); }
+        nav.scrolled .logo { color: var(--text-dark); }
+        
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-serif); font-size: 2rem; color: #fff; text-decoration: none; letter-spacing: 2px; transition: color 0.4s; font-weight: 600; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { color: #fff; text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--brand-primary); }
+        .book-btn { border: 1px solid var(--brand-primary); padding: 10px 20px; color: var(--brand-primary) !important; transition: 0.3s; border-radius: 4px; }
+        .book-btn:hover { background: var(--brand-primary); color: #fff !important; }
+
+        /* ==========================================================================
+           3. HERO SECTION (Dreamy & Soft)
+           ========================================================================== */
+        .hero {
+            height: 100vh; position: relative;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+        }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            /* Added a subtle pink gradient overlay to the background image */
+            background: linear-gradient(rgba(43, 26, 32, 0.4), rgba(216, 27, 96, 0.2)), url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
+        }
+        .hero-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.5); }
+        
+        .hero-content { position: relative; z-index: 2; padding: 0 20px; }
+        .hero-subtitle { font-family: var(--font-sans); color: var(--brand-light); text-transform: uppercase; letter-spacing: 5px; font-size: 0.9rem; margin-bottom: 20px; display: block; font-weight: 700; }
+        .hero-title { font-size: clamp(3.5rem, 8vw, 6rem); color: #fff; line-height: 1.1; margin-bottom: 30px; }
+        .hero-desc { color: #fdfdfd; max-width: 600px; margin: 0 auto; font-size: 1.1rem; font-weight: 300; }
+
+        /* ==========================================================================
+           4. PHILOSOPHY SECTION (About)
+           ========================================================================== */
+        .philosophy { padding: 120px 0; background: var(--bg-blush); text-align: center; }
+        .section-title { font-size: 3rem; margin-bottom: 20px; }
+        .floral-divider { font-size: 1.5rem; color: var(--brand-primary); margin-bottom: 30px; opacity: 0.7; }
+        .philosophy-text { max-width: 800px; margin: 0 auto; font-size: 1.2rem; color: var(--text-light); line-height: 1.8; }
+
+        /* ==========================================================================
+           5. SERVICES SECTION (Elegant Grid)
+           ========================================================================== */
+        .services { padding: 100px 0; background: var(--bg-white); }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
+        .service-card { text-align: center; padding: 40px 20px; border: 1px solid var(--brand-light); transition: 0.4s; background: var(--bg-blush); border-radius: 8px; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(216, 27, 96, 0.08); border-color: var(--brand-primary); }
+        .service-card img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 2px solid var(--brand-light); padding: 5px; }
+        .service-card h3 { font-size: 1.8rem; margin-bottom: 15px; }
+        .service-card p { color: var(--text-light); font-size: 0.95rem; }
+
+        /* ==========================================================================
+           6. THE JOURNEY (Process Timeline)
+           ========================================================================== */
+        .process { padding: 120px 0; background: var(--bg-blush); }
+        .timeline { max-width: 800px; margin: 60px auto 0; position: relative; }
+        .timeline::before { content: ''; position: absolute; left: 50%; top: 0; height: 100%; width: 2px; background: var(--brand-light); transform: translateX(-50%); }
+        .timeline-step { display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; position: relative; }
+        .timeline-step:nth-child(even) { flex-direction: row-reverse; }
+        .step-content { width: 45%; background: var(--bg-white); padding: 30px; border: 1px solid var(--brand-light); border-radius: 8px; }
+        .step-number { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 40px; height: 40px; background: var(--bg-blush); border: 2px solid var(--brand-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 1.2rem; color: var(--brand-primary); font-weight: bold; z-index: 2; }
+        .step-content h4 { font-size: 1.5rem; margin-bottom: 10px; color: var(--brand-primary); }
+        .step-content p { color: var(--text-light); font-size: 0.9rem; }
+
+        /* ==========================================================================
+           7. FOUNDER SECTION
+           ========================================================================== */
+        .founders { padding: 100px 0; background: var(--bg-white); }
+        .founders-flex { display: flex; align-items: center; gap: 60px; }
+        .founder-img { flex: 1; position: relative; }
+        .founder-img img { width: 100%; height: auto; border-radius: 8px; box-shadow: -15px 15px 0 var(--brand-light); }
+        .founder-text { flex: 1; }
+        .founder-text h2 { font-size: 3rem; margin-bottom: 15px; }
+        .founder-text p { color: var(--text-light); margin-bottom: 20px; font-size: 1.1rem; }
+
+        /* ==========================================================================
+           8. PORTFOLIO GALLERY (Masonry Feel)
+           ========================================================================== */
+        .gallery { padding: 100px 0; background: var(--bg-blush); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 50px; }
+        .gallery-item { overflow: hidden; position: relative; border-radius: 8px; aspect-ratio: 4/5; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
+        .gallery-item:hover img { transform: scale(1.05); }
+
+        /* ==========================================================================
+           9. TESTIMONIALS (Quotes)
+           ========================================================================== */
+        .testimonials { padding: 120px 0; background: var(--bg-white); text-align: center; }
+        .quote-icon { font-size: 2rem; color: var(--brand-light); margin-bottom: 30px; }
+        .testi-text { font-family: var(--font-serif); font-size: 2rem; font-style: italic; max-width: 800px; margin: 0 auto 30px; line-height: 1.4; color: var(--text-dark); }
+        .testi-author { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; color: var(--brand-primary); font-weight: bold; }
+
+        /* ==========================================================================
+           10. FAQs SECTION
+           ========================================================================== */
+        .faq { padding: 100px 0; background: var(--bg-blush); }
+        .faq-container { max-width: 800px; margin: 50px auto 0; }
+        .faq-item { border-bottom: 1px solid var(--brand-light); padding: 20px 0; cursor: pointer; }
+        .faq-question { display: flex; justify-content: space-between; font-family: var(--font-serif); font-size: 1.4rem; color: var(--text-dark); }
+        .faq-answer { display: none; padding-top: 15px; color: var(--text-light); font-size: 0.95rem; }
+
+        /* ==========================================================================
+           11. CONTACT FORM
+           ========================================================================== */
+        .contact { padding: 120px 0; background: var(--bg-white); }
+        .contact-wrapper { max-width: 700px; margin: 0 auto; text-align: center; }
+        .form-group { margin-bottom: 25px; text-align: left; }
+        .form-group input, .form-group textarea { width: 100%; padding: 15px; border: 1px solid var(--brand-light); background: var(--bg-blush); font-family: var(--font-sans); font-size: 1rem; outline: none; transition: 0.3s; border-radius: 4px; }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--brand-primary); }
+        .submit-btn { background: var(--brand-primary); color: var(--bg-white); border: none; padding: 18px 40px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; width: 100%; border-radius: 4px; font-weight: bold; }
+        .submit-btn:hover { background: var(--text-dark); }
+        
+        .contact-info-cards { display: flex; justify-content: center; gap: 30px; margin-bottom: 50px; flex-wrap: wrap; }
+        .info-card { padding: 20px; background: var(--bg-blush); border-radius: 8px; border: 1px solid var(--brand-light); min-width: 200px; }
+        .info-card i { font-size: 1.5rem; color: var(--brand-primary); margin-bottom: 10px; }
+        .info-card p { font-size: 0.95rem; color: var(--text-dark); }
+        .info-card a { color: var(--text-dark); text-decoration: none; transition: 0.3s; }
+        .info-card a:hover { color: var(--brand-primary); }
+
+        /* ==========================================================================
+           12. FOOTER
+           ========================================================================== */
+        footer { background: var(--text-dark); color: var(--bg-white); padding: 60px 0 20px; text-align: center; }
+        .footer-logo { font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 20px; color: var(--brand-light); }
+        .social-icons { margin-bottom: 40px; }
+        .social-icons a { color: var(--bg-white); margin: 0 15px; font-size: 1.2rem; transition: 0.3s; }
+        .social-icons a:hover { color: var(--brand-primary); }
+        .copyright { font-size: 0.8rem; color: #aaa; text-transform: uppercase; letter-spacing: 2px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+
+        /* ==========================================================================
+           13. RESPONSIVE DESIGN
+           ========================================================================== */
+        @media (max-width: 900px) {
+            .services-grid, .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .founders-flex { flex-direction: column; }
+            .timeline::before { left: 0; }
+            .timeline-step, .timeline-step:nth-child(even) { flex-direction: column; align-items: flex-start; padding-left: 30px; }
+            .step-content { width: 100%; }
+            .step-number { left: 0; }
+            .nav-links { display: none; }
+        }
+        @media (max-width: 600px) {
+            .services-grid, .gallery-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2.8rem; }
+            .section-title { font-size: 2.2rem; }
+            .contact-info-cards { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">Sangeet Waale</a>
+            <div class="nav-links">
+                <a href="#philosophy">Our Philosophy</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="https://wa.me/+918744940471" target="_blank" class="book-btn"><i class="fab fa-whatsapp"></i> Chat with Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content reveal">
+            <span class="hero-subtitle">Delhi & Destination Weddings</span>
+            <h1 class="hero-title">Choreographing<br><span class="highlight-text">Your Forever</span></h1>
+            <p class="hero-desc">We craft bespoke, cinematic dance performances that transform your wedding celebrations into unforgettable, emotional masterpieces.</p>
+        </div>
+    </section>
+
+    <section id="philosophy" class="philosophy">
+        <div class="container reveal">
+            <h2 class="section-title">Beyond Steps, We Teach <span class="highlight-text">Emotions</span></h2>
+            <div class="floral-divider"><i class="fab fa-pagelines"></i></div>
+            <p class="philosophy-text">Sangeet Waale is not a standard dance class. We are premium performance directors. We believe your wedding dance shouldn't be a stressful routine, but a beautiful reflection of your love story. From grand celebrity-style entries to intimate first dances, we handle the entire stage production.</p>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <div class="text-center reveal" style="text-align: center;">
+                <h2 class="section-title">Our <span class="highlight-text">Expertise</span></h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <img src="https://images.pexels.com/photos/15582307/pexels-photo-15582307/free-photo-of-newlywed-couple-dancing.jpeg?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Couple">
+                    <h3>The First Dance</h3>
+                    <p>Cinematic, elegant choreography designed specifically for the bride and groom's grand moment.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.1s;">
+                    <img src="https://i.pinimg.com/originals/40/6f/e0/406fe091a8b1463d09d34f53acfa0d2c.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Family">
+                    <h3>Sangeet Production</h3>
+                    <p>End-to-end stage direction, lighting coordination, and full family performance management.</p>
+                </div>
+                <div class="service-card reveal" style="transition-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Destination">
+                    <h3>Destination Weddings</h3>
+                    <p>We travel with you across India and globally to manage rehearsals and direct the final show on-site.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process">
+        <div class="container">
+            <div class="text-center reveal" style="text-align: center;">
+                <h2 class="section-title">The <span class="highlight-text">Journey</span></h2>
+                <p>How we bring your vision to the stage.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-step reveal">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Vision Consultation</h4>
+                        <p>We sit down to understand your story, family dynamics, and musical preferences.</p>
+                    </div>
+                </div>
+                <div class="timeline-step reveal">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Concept & Music</h4>
+                        <p>Our team curates a custom audio mix and designs the thematic flow of the performances.</p>
+                    </div>
+                </div>
+                <div class="timeline-step reveal">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Stress-Free Rehearsals</h4>
+                        <p>We teach with patience, ensuring non-dancers feel confident and look graceful.</p>
+                    </div>
+                </div>
+                <div class="timeline-step reveal">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Show Direction</h4>
+                        <p>On the big day, we manage the stage, entries, and cues so you can simply shine.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="founders">
+        <div class="container founders-flex">
+            <div class="founder-img reveal">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Jyoti Dholakhandi - Founder">
+            </div>
+            <div class="founder-text reveal">
+                <h2>Meet <span class="highlight-text">Jyoti Dholakhandi</span></h2>
+                <p><strong>Founder & Lead Choreographer</strong></p>
+                <p>With an incredible passion for dance and theatrical production, Jyoti created <strong>Sangeet Waale</strong> to elevate the standard of Indian wedding performances.</p>
+                <p>Operating out of Delhi, she believes every couple deserves a paparazzi-worthy moment, meticulously planned and flawlessly executed on stage.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="gallery">
+        <div class="container">
+            <div class="text-center reveal" style="text-align: center;">
+                <h2 class="section-title">Captured <span class="highlight-text">Moments</span></h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item reveal"><img src="https://i.pinimg.com/1200x/32/28/30/3228307e1cfd1877d176ee903b7544dc.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gallery 1"></div>
+                <div class="gallery-item reveal" style="transition-delay: 0.1s;"><img src="https://i.pinimg.com/1200x/73/4f/c4/734fc41e6df88aa120694c89a6ba7b46.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gallery 2"></div>
+                <div class="gallery-item reveal" style="transition-delay: 0.2s;"><img src="https://i.pinimg.com/1200x/19/79/df/1979dfbf8a4181f091a3543c6f94e5e3.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gallery 3"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container reveal">
+            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+            <p class="testi-text">"They didn't just teach us a dance; they directed a cinematic experience. Our Sangeet felt like a royal gala, and my parents looked like absolute stars."</p>
+            <p class="testi-author">Priya & Rohan — Destination Wedding</p>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <div class="text-center reveal" style="text-align: center;">
+                <h2 class="section-title">Frequent <span class="highlight-text">Inquiries</span></h2>
+            </div>
+            <div class="faq-container reveal">
+                <div class="faq-item">
+                    <div class="faq-question">Do you travel for destination weddings? <i class="fas fa-plus highlight-text"></i></div>
+                    <div class="faq-answer">Yes, we travel Pan-India and internationally. We manage on-site rehearsals and coordinate directly with your wedding planners for stage logistics.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Our family has two left feet. Can you help? <i class="fas fa-plus highlight-text"></i></div>
+                    <div class="faq-answer">Absolutely. Our expertise lies in making non-dancers look graceful and feel confident. We tailor the choreography to suit every individual's comfort level.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How early should we book? <i class="fas fa-plus highlight-text"></i></div>
+                    <div class="faq-answer">We take a limited number of weddings per season to maintain our quality. We recommend booking at least 3-4 months in advance.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-wrapper reveal">
+                <h2 class="section-title">Begin Your <span class="highlight-text">Journey</span></h2>
+                <p style="margin-bottom: 40px; color: var(--text-light);">Share the details of your grand celebration, or reach out to us directly in Delhi.</p>
+                
+                <div class="contact-info-cards">
+                    <div class="info-card">
+                        <i class="fab fa-whatsapp"></i>
+                        <p><strong>Call / WhatsApp</strong></p>
+                        <p><a href="https://wa.me/+918744940471" target="_blank">+91 8744940471</a></p>
+                    </div>
+                    <div class="info-card">
+                        <i class="far fa-envelope"></i>
+                        <p><strong>Email Us</strong></p>
+                        <p><a href="mailto:Sangeetwaale@gmail.com">Sangeetwaale@gmail.com</a></p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fab fa-instagram"></i>
+                        <p><strong>Instagram</strong></p>
+                        <p><a href="https://instagram.com/jyotidholakhandi" target="_blank">@jyotidholakhandi</a></p>
+                    </div>
+                </div>
+                
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <input type="text" placeholder="Bride & Groom Names" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Wedding Dates & Location (City/Venue)" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="4" placeholder="Tell us about your vision..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Request Consultation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Sangeet Waale</div>
+            <div class="social-icons">
+                <a href="https://instagram.com/jyotidholakhandi" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/+918744940471" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:Sangeetwaale@gmail.com"><i class="far fa-envelope"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Sangeet Waale by Jyoti. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // 1. Navbar Scroll Effect
+            const navbar = document.getElementById("navbar");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add("scrolled");
+                } else {
+                    navbar.classList.remove("scrolled");
+                }
+            });
+
+            // 2. Scroll Reveal Animation
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // 3. FAQ Accordion Logic
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                const icon = item.querySelector('i');
+
+                question.addEventListener('click', () => {
+                    const isOpen = answer.style.display === 'block';
+                    
+                    // Close all others
+                    document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+                    document.querySelectorAll('.faq-question i').forEach(i => {
+                        i.classList.remove('fa-minus');
+                        i.classList.add('fa-plus');
+                    });
+
+                    // Open clicked if it wasn't open
+                    if (!isOpen) {
+                        answer.style.display = 'block';
+                        icon.classList.remove('fa-plus');
+                        icon.classList.add('fa-minus');
+                    }
+                });
+            });
+            
+            // Trigger initial hero reveal
+            setTimeout(() => {
+                document.querySelector('.hero-content').classList.add('active');
+            }, 100);
+        });
+    </script>
+</body>
+</html>
